@@ -1,0 +1,29 @@
+        local mode = game.Players.LocalPlayer.Character.combat.mode
+        local copy = mode:Clone()
+        copy.Parent = mode.Parent
+        mode:Destroy()
+        local chakra = string.split(game.Players.LocalPlayer.PlayerGui.Main.ingamearena.Bar.cha.Text,"CHA: ")[2]
+        c = chakra:gsub("CHA%:","")
+        local cha
+        local function chakracheck()
+            chakra = string.split(game.Players.LocalPlayer.PlayerGui.Main.ingamearena.Bar.cha.Text,"CHA: ")[2]
+            c = chakra:gsub("CHA%:","")
+            cha = c
+        end
+        spawn(function() 
+            while wait() do
+                if game.Players.LocalPlayer.Character.Humanoid.WalkSpeed == 0 then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+                end
+                chakracheck()
+            end
+        end)
+        spawn(function() 
+            while wait() do
+                if tonumber(cha) < tonumber(when) then
+                    game.Players.LocalPlayer.Character.combat.update:FireServer("key","c")
+                else
+                    game.Players.LocalPlayer.Character.combat.update:FireServer("key","cend")
+                end
+            end
+        end)

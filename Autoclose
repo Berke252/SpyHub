@@ -1,4 +1,4 @@
-_G.WalkSpeed = true;
+_G.WalkSpeed = false;
 _G.Speed = 50;
 
 local mt = getrawmetatable(game)

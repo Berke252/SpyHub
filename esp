@@ -18,3 +18,4 @@ TextLabel.TextColor3 = Color3.new(1, 0, 0)
 TextLabel.TextScaled = true
 end
 end
+end)

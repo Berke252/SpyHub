@@ -88,9 +88,9 @@ getgenv().speed = 500
 		autofarm = bool
 	end)
 
-	local candies
+	local gift
     Farm:addToggle("Farm Gift Box", nil, function(bool)
-		candies = bool
+		gift = bool
     end)
     
   	local RANKUP
@@ -106,6 +106,8 @@ getgenv().speed = 500
     Scroll:addToggle("Scroll Farm", nil, function(bool)
 		scrollfarm = bool
     end)
+    
+
 
 --Three page
 local page3 = venyx:addPage("Quests Maker", 5012544693)
@@ -147,7 +149,7 @@ local d = page3:addSection("Quests Maker")
 	end)
 
 	game:GetService('RunService').Stepped:connect(function()
-		if autofarm or candies then
+		if autofarm or gift then
 			pcall(function()
 				game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
 			end)
@@ -155,7 +157,7 @@ local d = page3:addSection("Quests Maker")
 	end)
 	local green = "http://www.roblox.com/asset/?id=5459241648"
 	local red = "http://www.roblox.com/asset/?id=5459241799"
-	local candy = "http://www.roblox.com/asset/?id=5710748193"
+	local candy = "http://www.roblox.com/asset/?id=6078390771"
 	spawn(function()
 		while wait() do
 			if autofarm then
@@ -212,18 +214,18 @@ local d = page3:addSection("Quests Maker")
 	end)
 	spawn(function()
 		while wait() do
-			if candies then
+			if gift then
 				local spins = player.statz.spins.Value
 				if spins < 500 then
 					for i,v in pairs(workspace.missiongivers:GetChildren()) do
 						pcall(function()
-							if mission.Visible == false and v.ClassName == "Model" and v:FindFirstChild("Head"):FindFirstChild("givemission").Enabled and v:FindFirstChild("CLIENTTALK") and v:FindFirstChild("Talk") and string.find(v.Talk.talk1.Value, "TRICK OR TREAT") and v.Talk:FindFirstChild("typ").Value == "halloweenevent" and v.Head.givemission.color.Image == candy then
+							if mission.Visible == false and v.ClassName == "Model" and v:FindFirstChild("Head"):FindFirstChild("givemission").Enabled and v:FindFirstChild("CLIENTTALK") and v:FindFirstChild("Talk") and string.find(v.Talk.talk1.Value, "Happy holidays, here is 1 FREE spin!") and v.Talk:FindFirstChild("typ").Value == "halloweenevent" and v.Head.givemission.color.Image == gift then
 								repeat wait(.3)
 									toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,CFrame.new(v.HumanoidRootPart.Position+Vector3.new(0,-5,0)))
 									v.CLIENTTALK:FireServer()
 									wait(.2)
 									v.CLIENTTALK:FireServer("accept")
-								until v:FindFirstChild("Head").givemission.Enabled == false or not candies
+								until v:FindFirstChild("Head").givemission.Enabled == false or not gift
 							end
 						end)
 					end

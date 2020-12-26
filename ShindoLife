@@ -42,7 +42,7 @@ Background = Color3.fromRGB(24, 24, 24),
 Glow = Color3.fromRGB(0, 0, 0),
 Accent = Color3.fromRGB(10, 10, 10),
 LightContrast = Color3.fromRGB(20, 20, 20),
-DarkContrast = Color3.fromRGB(14, 14, 14),  
+DarkContrast = Color3.fromRGB(14, 14, 14),
 TextColor = Color3.fromRGB(255, 255, 255)
 }
 
@@ -50,7 +50,6 @@ TextColor = Color3.fromRGB(255, 255, 255)
 local page = venyx:addPage("Main", 5012544693)
 local section1 = page:addSection("Auto Doge")
 local section2 = page:addSection("Inf Mode")
-local section3 = page:addSection("Settings")
 
 section1:addButton("Open", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/6Wumpus6/SpyHub/main/Autoopen", true))()
@@ -68,15 +67,9 @@ section2:addButton("Close", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/6Wumpus6/SpyHub/main/Infmodeclose", true))()
 end)
 
-section3:addKeybind("Show/Hide Settings", Enum.KeyCode.P, function()
-print("Activated Keybind")
-venyx:toggle()
-end, function()
-print("Changed Keybind")
-end)
-
 
 --Two page
+if warplace then
 local page2 = venyx:addPage("Autofarm", 5012544693)
 local Farm = page2:addSection("Mission Farm")
 local Scroll = page2:addSection("Scroll Farm")
@@ -108,6 +101,19 @@ getgenv().speed = 500
     end)
     
 
+--Warmode Page
+local warmodepage = venyx:addPage("War Farm", 5012544693)
+local warfarm = warmodepage:addSection("Warmode")
+
+local war
+    warfarm:addToggle("Warmode", nil, function(bool)
+	   war = bool
+	end)
+	
+    local reset
+    warfarm:addToggle("Reset round 21", nil, function(bool)
+        reset = bool
+    end)
 
 --Three page
 local page3 = venyx:addPage("Quests Maker", 5012544693)
@@ -261,6 +267,7 @@ local d = page3:addSection("Quests Maker")
 			end
 		end
 	end
+
 	spawn(function()
 		while wait() do
 			if scrollfarm then
@@ -271,6 +278,100 @@ local d = page3:addSection("Quests Maker")
 			end
 		end
 	end)
+	
+		game:GetService('RunService').Stepped:connect(function()
+		if war or war2 then
+			pcall(function()
+				game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+			end)
+		end
+	end)
+
+	spawn(function()
+		while wait() do
+			if war or war2 then
+				repeat wait()
+					SCROLLFARM()
+					SCROLLFARM1()
+				until not scrollfarm or not war or not war2
+			end
+		end
+	end)
+	spawn(function()
+		while wait() do
+			if war then
+				pcall(function()
+					refresh:Refresh("War Completed: " .. count)
+					refreshC:Refresh("Round: " .. workspace.warserver.round.Value)
+				end)
+				for i,v in pairs(workspace.npc:GetChildren()) do
+					if workspace.warserver:FindFirstChild("zetsu").Value > 0 and string.find(workspace.warserver.text.Value, "Left") or string.find(workspace.warserver.text.Value, "DEFEAT") and v.ClassName == "Model" and v:FindFirstChild("npc") and string.find(v.Name, "npc") and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Head.CFrame.Y > -1000 and not v:FindFirstChild("megaboss") then
+						wait(.2)
+						pcall(function()
+							v.Humanoid.Health = 0
+						end)
+					elseif v.ClassName == "Model" and v:FindFirstChild("npc") and string.find(v.Name, "npc") and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Head.CFrame.Y > -1000 and v:FindFirstChild("megaboss") then
+						wait(6)
+						pcall(function()
+							toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,CFrame.new(v.HumanoidRootPart.Position))
+							v.Humanoid.Health = 0
+						end)
+					end
+				end
+				if reset then
+					for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+						if v.Name == "warserver" and v:FindFirstChild("round").Value > 20 then
+							wait(5)
+							player.Character:BreakJoints()
+							repeat wait()
+							until v.round.Value == 0
+							count = count + 1
+						end
+					end
+				end
+			end
+		end
+	end)
+	
+	spawn(function()
+		while wait() do
+			if war2 then
+				refresh:Refresh("War Completed: " .. count)
+				refreshC:Refresh("Round: " .. workspace.warserver.round.Value)
+				for i,v in pairs(workspace.npc:GetChildren()) do
+					if workspace.warserver:FindFirstChild("zetsu").Value > 0 and string.find(workspace.warserver.text.Value, "Left") or string.find(workspace.warserver.text.Value, "DEFEAT") and v.ClassName == "Model" and v:FindFirstChild("npc") and string.find(v.Name, "npc") and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Head.CFrame.Y > -1000 and not v:FindFirstChild("megaboss") then
+						pcall(function()
+							repeat wait()
+							toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,CFrame.new(v.HumanoidRootPart.Position+Vector3.new(0,-12,0)))
+							wait(.3)
+							v.Humanoid.Health = 0
+							until v.Humanoid.Health == 0
+						end)
+					elseif v.ClassName == "Model" and v:FindFirstChild("npc") and string.find(v.Name, "npc") and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Head.CFrame.Y > -1000 and v:FindFirstChild("megaboss") then
+						wait(8)
+						pcall(function()
+							toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,CFrame.new(v.HumanoidRootPart.Position+Vector3.new(0,-25,0)))
+							v.Humanoid.Health = 0
+						end)
+					else
+						wait()
+					end
+				end
+				if reset then
+					for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+						if v.Name == "warserver" and v:FindFirstChild("round").Value > 20 then
+							wait(5)
+							player.Character:BreakJoints()
+							repeat wait()
+							until v.round.Value == 0
+							count = count + 1
+						end
+					end
+				end
+			end
+		end
+	end)
+
 	local function JINFARM()
 		for i,v in pairs(game:GetService("Workspace").npc:GetChildren()) do
 			if v.Name == "npc1" then
@@ -305,10 +406,10 @@ local d = page3:addSection("Quests Maker")
 	end)
 	
 --Four page
+if game.PlaceId == menuplace then
 local inf = venyx:addPage("Inf Spin", 5012544693)
 local spin = inf:addSection("Infinity Spin")
 
-if game.PlaceId == menuplace then
 	--main menu
 	local kgs = {}
 	for i,v in pairs(game:GetService("ReplicatedStorage").alljutsu:GetChildren()) do
@@ -399,7 +500,7 @@ if game.PlaceId == menuplace then
         game:GetService('TeleportService'):Teleport(game.PlaceId, player)	 
     end)
 end
-    
+
 --Five page
 local page5 = venyx:addPage("Discord", 5012544693)
 local Discord = page5:addSection("Mission Farm")
@@ -409,8 +510,16 @@ Discord:addButton("Copy Discord Link", function()
 end)
     
 -- Theme page
-local theme = venyx:addPage("Theme", 5012544693)
-local colors = theme:addSection("Colors")
+local settings = venyx:addPage("Settings", 5012544693)
+local colors = settings:addSection("Colors")
+local setting = settings:addSection("Settings")
+
+setting:addKeybind("Show/Hide Settings", Enum.KeyCode.P, function()
+print("Activated Keybind")
+venyx:toggle()
+end, function()
+print("Changed Keybind")
+end)
 
 for theme, color in pairs(themes) do -- all in one theme changer, i know, im cool
 colors:addColorPicker(theme, color, function(color3)

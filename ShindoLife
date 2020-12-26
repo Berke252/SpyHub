@@ -69,7 +69,6 @@ end)
 
 
 --Two page
-if warplace then
 local page2 = venyx:addPage("Autofarm", 5012544693)
 local Farm = page2:addSection("Mission Farm")
 local Scroll = page2:addSection("Scroll Farm")

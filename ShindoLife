@@ -51,19 +51,19 @@ local page = venyx:addPage("Main", 5012544693)
 local section1 = page:addSection("Auto Doge")
 local section2 = page:addSection("Inf Mode")
 
-section1:addButton("Open", function()
+section1:addButton("Aç", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/6Wumpus6/SpyHub/main/Autoopen", true))()
 end)
 
-section1:addButton("Close", function()
+section1:addButton("Kapat", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/6Wumpus6/SpyHub/main/Autoclose", true))()
 end)
 
-section2:addButton("Open", function()
+section2:addButton("Aç", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/6Wumpus6/SpyHub/main/InfmodeOpen", true))()
 end)
 
-section2:addButton("Close", function()
+section2:addButton("Kapat", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/6Wumpus6/SpyHub/main/Infmodeclose", true))()
 end)
 
@@ -76,32 +76,32 @@ getgenv().speed = 500
 
 
 	local autofarm
-	Farm:addToggle("AutoFarm", nil, function(bool)
+	Farm:addToggle("Otomatik Kasılma", nil, function(bool)
 		autofarm = bool
 	end)
 
 	local gift
-    Farm:addToggle("Farm Gift Box", nil, function(bool)
+    Farm:addToggle("Hediye Kutusu Kasma *anlamadım*", nil, function(bool)
 		gift = bool
     end)
     
   	local RANKUP
-    Farm:addToggle("AutoRank", nil, function(bool)
+    Farm:addToggle("Otomatik Rank", nil, function(bool)
 		RANKUP = bool
     end)
     
     	local jinfarm
-    Scroll:addToggle("Jin Farm", nil, function(bool)
+    Scroll:addToggle("Jin Kasma", nil, function(bool)
 		jinfarm = bool
     end)
 
-    Scroll:addToggle("Scroll Farm", nil, function(bool)
+    Scroll:addToggle("Scroll Kasma", nil, function(bool)
 		scrollfarm = bool
     end)
     
 
 --Warmode Page
-local warmodepage = venyx:addPage("War Farm", 5012544693)
+local warmodepage = venyx:addPage("War Kasma", 5012544693)
 local warfarm = warmodepage:addSection("Warmode")
 
 local war
@@ -110,13 +110,13 @@ local war
 	end)
 	
     local reset
-    warfarm:addToggle("Reset round 21", nil, function(bool)
+    warfarm:addToggle("Round 21 de reset çek", nil, function(bool)
         reset = bool
     end)
 
 --Three page
 local page3 = venyx:addPage("Quests Maker", 5012544693)
-local d = page3:addSection("Quests Maker")
+local d = page3:addSection("Görev Oluşturucu")
 
     d:addButton("Rush",function()
 		for i = 1,300 do
@@ -504,8 +504,8 @@ end
 local page5 = venyx:addPage("Discord", 5012544693)
 local Discord = page5:addSection("Mission Farm")
 
-Discord:addButton("Copy Discord Link", function()
-    setclipboard("https://discord.gg/kS9mrChF4m")
+Discord:addButton("Çevirmenin Discord Linkini Kopyala", function()
+    setclipboard("https://discord.gg/Xeqk4pfEuJ")
 end)
     
 -- Theme page
@@ -513,11 +513,11 @@ local settings = venyx:addPage("Settings", 5012544693)
 local colors = settings:addSection("Colors")
 local setting = settings:addSection("Settings")
 
-setting:addKeybind("Show/Hide Settings", Enum.KeyCode.P, function()
-print("Activated Keybind")
+setting:addKeybind("Göster/Gizle Ayarları", Enum.KeyCode.P, function()
+print("Tuş Aktifleştirildi")
 venyx:toggle()
 end, function()
-print("Changed Keybind")
+print("Tuş Değişti")
 end)
 
 for theme, color in pairs(themes) do -- all in one theme changer, i know, im cool
